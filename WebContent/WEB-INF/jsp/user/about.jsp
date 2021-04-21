@@ -24,7 +24,8 @@
 <!-- </head> -->
 <body
 	style="width: 100%; height: 100%; over-flow: hidden; background: url(images/bg.jpg) repeat;">
-
+	<div style="border-bottom:5px solid yellow;margin-bottom:10px;"><h2 >本小区，诚心诚意为您服务      …^_^</h2></div>
+	<br>
 	<table style="width: 100%; height: 100%">
 		<tr>
 			<td style="width: 50%"><h2>小区的安保力量与秩序：</h2> <img class="image"
