@@ -250,7 +250,7 @@
 		</div>
 		<div class="row" style="height:50px;"></div>
    <footer class="copyright">  
-          Copyright &nbsp; 2017 CSU rights reserved.  
+          Copyright &nbsp; 2021 ZhangRui rights reserved.  
         </footer>  
 			
 

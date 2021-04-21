@@ -266,7 +266,7 @@ function testResponseBody(){
 		</div>
 	</div>
 	  <footer class="copyright">  
-          Copyright &nbsp; 2021 CSU rights reserved.  
+          Copyright &nbsp; 2021 ZhangRui rights reserved.  
         </footer>
 </div>
 				

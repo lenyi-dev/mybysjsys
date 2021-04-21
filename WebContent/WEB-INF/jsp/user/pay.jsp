@@ -245,7 +245,7 @@
 		</div>   <!-- md-8层结束 -->
 	</div>
 	    <footer class="copyright">  
-          Copyright &nbsp; 2017 CSU rights reserved.  
+          Copyright &nbsp; 2021 ZhangRui rights reserved.  
         </footer>
 		
 </div>
