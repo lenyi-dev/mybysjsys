@@ -1,6 +1,7 @@
 package org.csu.pms.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +84,11 @@ public class CarController {
    @RequestMapping(value="/manager/loadEditCar")
    @ResponseBody
 	 public  Object loadEditCar(@RequestParam(value="carNum",required=false) String carNum){
-   	
+	   try {
+		carNum = new String(carNum.getBytes("iso-8859-1"), "utf-8");
+	} catch (UnsupportedEncodingException e) {
+		System.out.println("carnum格式转换异常:"+e);
+	}
 		Car car = new Car();
 		car = pmsService.findCarById(carNum);
 		System.out.println("load Car :"+ carNum);

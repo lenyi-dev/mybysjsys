@@ -63,6 +63,7 @@ public class NoticeController {
 	@RequestMapping(value = "/news_item")
 	public String newsItem(@RequestParam("id") String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) throws UnsupportedEncodingException {
+		id = new String(id.getBytes("iso-8859-1"), "utf-8");
 		Notice notice = pmsService.selectNewsItem(id);
 		model.addAttribute("notice", notice);
 		return "user/news_item";

@@ -24,7 +24,8 @@
 <!-- </head> -->
 <body
 	style="width: 100%; height: 100%; over-flow: hidden; background: url(images/bg.jpg) repeat;">
-	<div style="border-bottom:5px solid yellow;margin-bottom:10px;"><h2 >本小区，诚心诚意为您服务      …^_^</h2></div>
+	<%@ include file="../common/nav.jsp"%>
+	<div style="border-bottom:5px solid yellow;margin-bottom:10px;"><h2 >小区物业，诚心诚意为您服务      …^_^</h2></div>
 	<br>
 	<table style="width: 100%; height: 100%">
 		<tr>

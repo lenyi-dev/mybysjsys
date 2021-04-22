@@ -1,6 +1,7 @@
 package org.csu.pms.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,21 +20,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+
 @Controller
 public class HouseTypeController {
 	@Autowired
-	   @Qualifier("pmsService")
+	@Qualifier("pmsService")
 	private PmsService pmsService;
-	
-	 @RequestMapping(value= {"/houseTypeMg"})
-	  public String houseTypeMg(@ModelAttribute("houseType") HouseType houseType) {
-	
+
+	@RequestMapping(value = { "/houseTypeMg" })
+	public String houseTypeMg(@ModelAttribute("houseType") HouseType houseType) {
+
 		return "manager/houseTypeMg";
 	}
-	 
-	@RequestMapping(value="/manager/houseType-list")
-	 public void selectRepair(
-			 HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+
+	@RequestMapping(value = "/manager/houseType-list")
+	public void selectRepair(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String key = request.getParameter("key");
 		String pageNoStr = request.getParameter("pageNo");
@@ -42,50 +44,54 @@ public class HouseTypeController {
 		int pageNo = Integer.valueOf(pageNoStr);
 		int rowMax = Integer.valueOf(rowMaxStr);
 
-		
 		HouseType houseType = new HouseType();
-		houseType.setDescription(key);;
-		//house.setHouseType(type);
-		
-		
-		PageVO<HouseType>  page = pmsService.listHouseType(houseType, pageNo, rowMax);
+		houseType.setDescription(key);
+		;
+		// house.setHouseType(type);
+
+		PageVO<HouseType> page = pmsService.listHouseType(houseType, pageNo, rowMax);
 
 		response.reset();
 		response.setContentType("text/plain;charset=UTF-8");
 		response.getWriter().print(JSON.toJSONString(page));
 		response.flushBuffer();
-}
-	
-	@RequestMapping(value="/manager/addHouseType")
-	 public void addHouseType(@ModelAttribute("houseType") HouseType houseType){	
+	}
+
+	@RequestMapping(value = "/manager/addHouseType")
+	public void addHouseType(@ModelAttribute("houseType") HouseType houseType) {
 		pmsService.addHouseType(houseType);
-		System.out.println("add HouseType :"+ houseType.getHouseType());	
+		System.out.println("add HouseType :" + houseType.getHouseType());
 		houseType = null;
 	}
-  
-  @RequestMapping(value="/manager/updateHouseType")
-	 public void updateHouseType(@ModelAttribute("houseType") HouseType houseType){
+
+	@RequestMapping(value = "/manager/updateHouseType")
+	public void updateHouseType(@ModelAttribute("houseType") HouseType houseType) {
 		pmsService.modifyHouseType(houseType);
-		System.out.println("modify HouseType :"+ houseType.getHouseType());
+		System.out.println("modify HouseType :" + houseType.getHouseType());
 	}
-  
-  
-  @RequestMapping(value="/manager/deleteHouseType")
-	 public void deleteHouseType(@RequestBody HouseType houseType, HttpServletResponse response){  	    	   	 
-	   int houseType1 = houseType.getHouseType();
-		pmsService.removeHouseType(houseType1);;		
-		System.out.println("delete HouseType :"+ houseType1);	
-		
+
+	@RequestMapping(value = "/manager/deleteHouseType")
+	public void deleteHouseType(@RequestBody HouseType houseType, HttpServletResponse response) {
+		int houseType1 = houseType.getHouseType();
+		pmsService.removeHouseType(houseType1);
+		;
+		System.out.println("delete HouseType :" + houseType1);
+
 	}
-  
-  @RequestMapping(value="/manager/loadEditHouseType")
-  @ResponseBody
-	 public  Object loadEditHouseType(@RequestParam(value="houseType",required=false) String houseType){
-  	
-	  HouseType houseType1 = new HouseType();
-	  int houseTypeNum = Integer.valueOf(houseType);
-	  houseType1 = pmsService.findHouseType(houseTypeNum);
-		System.out.println("load HouseType :"+ houseType);
+
+	@RequestMapping(value = "/manager/loadEditHouseType")
+	@ResponseBody
+	public Object loadEditHouseType(@RequestParam(value = "houseType", required = false) String houseType) {
+		try {
+			houseType = new String(houseType.getBytes("iso-8859-1"), "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			System.out.println("housetype格式转换异常：" + e);
+		}
+		HouseType houseType1 = new HouseType();
+		int houseTypeNum = Integer.valueOf(houseType);
+		houseType1 = pmsService.findHouseType(houseTypeNum);
+		System.out.println("load HouseType :" + houseType);
 		return houseType1;
 	}
 }
