@@ -405,8 +405,8 @@ $(function(){
 	$("#button-pay").click(function(){
 		$("#consumeType").val("1");
 		searchForm.trigger("submit");
+		window.location.reload();
 		alert("成功返回缴费");
-	
 	});
 
 	datagrid.on("change","input[type='checkbox']",function(){
@@ -448,7 +448,7 @@ $(function(){
     	searchForm.trigger("submit");
     	alert("支付成功")
     	/* swapCheck(); */
-
+		window.location.reload();
     	
     });
 }); 
