@@ -39,7 +39,6 @@
 					<div class="news-des2">
 						<br />
 						<div class="content-single-article">
-
 							${requestScope.notice.noticeContent}</div>
 					</div>
 				</div>

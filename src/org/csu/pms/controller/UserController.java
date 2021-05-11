@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,12 +47,19 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/change")
-	public String change(@RequestParam("password") String password, @RequestParam("phone") String phone, Model model,
-			HttpSession session) {
+	public String change(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		User user = (User) (session.getAttribute("user"));
+		String password = "";
+		String phone = "";
 		try {
-			password = new String(password.getBytes("iso-8859-1"), "utf-8");
-			phone = new String(phone.getBytes("iso-8859-1"), "utf-8");
+			password = request.getParameter("password");
+			phone = request.getParameter("phone");
+			if (!StringUtils.isEmpty(password)) {
+				password = new String(password.getBytes("iso-8859-1"), "utf-8");
+			}
+			if (!StringUtils.isEmpty(phone)) {
+				phone = new String(phone.getBytes("iso-8859-1"), "utf-8");
+			}
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,6 +152,7 @@ public class UserController {
 	public String userMg(@ModelAttribute("user") User user) {
 		return "manager/userMg";
 	}
+
 	@RequestMapping(value = "/info")
 	public String about() {
 		return "user/about";
